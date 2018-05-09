@@ -25,7 +25,13 @@ def readTemp():
 		return temp
 
 #A function that will be called to continuously check if the timer is up		
-def timerCheck(st):
+def timerCheck(st, dest):
+		if time.time() - start >= dest
+			#TO DO add an alert for the timer being up
+			return
+		else
+			return
+		
 		
 # Raspberry Pi hardware SPI configuration.
 SPI_PORT   = 0
@@ -63,6 +69,9 @@ p = GPIO.PWM(18, 100)
 #A variable for the current temperature
 curTemp = 0
 
+#A variable for the previous temperature
+prevTemp = 0
+
 #A variable for the current duty cycle. Starts at 100
 DC = 100
 
@@ -79,13 +88,22 @@ while True:
 	else
 		curTemp = c_to_f(readTemp())
 	
+	#Once per loop it will check if the timer has ended
+	timerCheck(start, destTemp)
 	
-	timerCheck(start)
-	
-	#Increment duty cycle if not within 10 degrees of target and Duty cycle is not maximum
-	if destTemp - curTemp > 10 and DC < 100:
+	#Increment duty cycle if current temperature is less than destination and the temperature is decreasing
+	if curTemp < destemp and DC < 100 and curTemp < prevTemp:
 		DC++
 		
+	#Decrement duty cycle if the current temp is over or within 2 degrees and still increasing	
+	else if destTemp - curTemp < 2 and DC > 75 and curtemp > prevtemp:
+		DC--
+
+	else if curTemp - destTemp 
+	
+	
+	
+	prevTemp = curTemp
 
 
 
