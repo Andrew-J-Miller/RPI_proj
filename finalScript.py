@@ -23,8 +23,9 @@ def readTemp():
 		temp = sensor.readTempC()
 		internal = sensor.readInternalC()
 		return temp
-	
 
+#A function that will be called to continuously check if the timer is up		
+def timerCheck(st):
 		
 # Raspberry Pi hardware SPI configuration.
 SPI_PORT   = 0
@@ -69,7 +70,7 @@ DC = 100
 p.start(DC)
 
 
-
+start = time.time()
 
 #This will be the main loop for heating the water. Will break out after a designated amount of time has passed with the read temp being within some percent of the dest temp
 while True:
@@ -77,6 +78,9 @@ while True:
 		curTemp = readTemp()
 	else
 		curTemp = c_to_f(readTemp())
+	
+	
+	timerCheck(start)
 	
 	#Increment duty cycle if not within 10 degrees of target and Duty cycle is not maximum
 	if destTemp - curTemp > 10 and DC < 100:
