@@ -219,7 +219,8 @@ while True:
 		counter++
 
 	#This counter number may need to be adjusted with some tests. We need to make sure the temperature is actually stabilized
-	if (counter == 10000):
+	#Will currently alert 
+	if (counter == 60):
 		# C# pop-up that notifies the user that the target temperature has been reached.
 		cur.fullUnload()
 		cur = alarm
