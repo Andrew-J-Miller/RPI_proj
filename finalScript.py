@@ -216,7 +216,7 @@ while True:
 	if abs(curTemp - desTemp > 1):
 		counter = 0
 	else:
-		counter++
+		counter += 1
 
 	#This counter number may need to be adjusted with some tests. We need to make sure the temperature is actually stabilized
 	#Will currently alert 
