@@ -2,11 +2,15 @@ import Rpi.GPIO as GPIO
 from pygame import mixer
 import time
 import sys
-
+import tkinter as tk
+from tkinter import ttk
 
 #libraries for thermocouple ADC and GPIO SPI
 import Adafruit_GPIO.SPI as SPI
 import Adafruit_MAX31855.MAX31855 as MAX31855
+
+#BoilScript.py
+#This is the script that will be run during the boil step. Essentially identical to heating template script
 
 mixer.init()
 
@@ -135,6 +139,25 @@ def readTemp():
 
 
 		
+		
+#Definition for a simple tk popup that will appear when the target temp is reached		
+def popupmsg(msg):
+    popup = tk.Tk()
+
+    def leavemini():
+        popup.destroy()
+
+    popup.wm_title("Destination Temperature Reached")
+    label = ttk.Label(popup, text=msg, font=NORM_FONT)
+    label.pack(side="top", fill="x", pady=10)
+    B1=ttk.Button(popup, text="Okay", command = leavemini)
+    B1.pack()
+    popup.mainloop()		
+		
+		
+		
+		
+		
 	
 # Raspberry Pi hardware SPI configuration.
 SPI_PORT   = 0
@@ -164,7 +187,7 @@ destTemp = sys.argv[1]
 
 
 
-
+NORM_FONT = ("Helvetica", 10)
 
 #p is the pin that uses pwm to control the relay. Currently set to GPIO 18 at 100 Hz
 p = GPIO.PWM(18, 100)
@@ -209,7 +232,7 @@ while True:
 		DC -= 1
 	
 	#greater and decreasing
-	#As the temp approaches the destination, the DC needs to be dialled back to stabilize
+	#As the temp approaches the destination, the DC needs to be dialed back to stabilize
 	else if curTemp > destTemp and DC < 100 and prevTemp > curTemp:
 		DC += 1
 	
@@ -222,11 +245,11 @@ while True:
 	#This counter number may need to be adjusted with some tests. We need to make sure the temperature is actually stabilized
 	#Will currently alert 
 	if (counter == 60):
-		# C# pop-up that notifies the user that the target temperature has been reached.
 		cur.fullUnload()
 		cur = alarm
 		cur.fullLoad()
 		cur.playSong()
+		popupmsg("Destination temperature reached")
 		#play alarm for 10 seconds
 		time.sleep(10)
 		#stop alarm

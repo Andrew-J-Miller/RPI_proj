@@ -2,6 +2,14 @@ import Rpi.GPIO as GPIO
 from pygame import mixer
 import time
 import sys
+import tkinter as tk
+from tkinter import ttk
+
+
+#This is the python script that will be called for the Mash step
+#Is essentially identical to the general heating template with the exception that the pump is run.
+
+
 
 
 #libraries for thermocouple ADC and GPIO SPI
@@ -117,6 +125,20 @@ alarm = songPlayer(#Alarm filename goes here in '')
 
 
 
+#Definition for a simple tk popup that will appear when the target temp is reached		
+def popupmsg(msg):
+    popup = tk.Tk()
+
+    def leavemini():
+        popup.destroy()
+
+    popup.wm_title("Destination Temperature Reached")
+    label = ttk.Label(popup, text=msg, font=NORM_FONT)
+    label.pack(side="top", fill="x", pady=10)
+    B1=ttk.Button(popup, text="Okay", command = leavemini)
+    B1.pack()
+    popup.mainloop()
+
 
 
 
@@ -145,7 +167,10 @@ sensor = MAX31855.MAX31855(spi=SPI.SpiDev(SPI_PORT, SPI_DEVICE))
 
 #Setting up GPIO pins
 GPIO.setmode(GPIO.BCM)
+#pwm pin for main heating element
 GPIO.setup(18, GPIO.OUT)
+#pin for activating pump relay currently set to 17 but may need to be changed later
+GPIO.setup(17, GPIO.OUT)
 
 
 #---------USER DEFINED VARIABLES FROM THE UI ARE DECLARED HERE----------------------------------------------
@@ -163,11 +188,14 @@ destTemp = sys.argv[1]
 #--------------------------------------------------------------------------------------------------------------------------------
 
 
-
+NORM_FONT = ("Helvetica", 10)
 
 
 #p is the pin that uses pwm to control the relay. Currently set to GPIO 18 at 100 Hz
 p = GPIO.PWM(18, 100)
+
+#write the pump relay pin to high to activate the pump
+GPIO.output(17, GPIO.HIGH)
 
 #A variable for the current temperature
 curTemp = 0
@@ -209,7 +237,7 @@ while True:
 		DC -= 1
 	
 	#greater and decreasing
-	#As the temp approaches the destination, the DC needs to be dialled back to stabilize
+	#As the temp approaches the destination, the DC needs to be dialed back to stabilize
 	else if curTemp > destTemp and DC < 100 and prevTemp > curTemp:
 		DC += 1
 	
@@ -227,6 +255,7 @@ while True:
 		cur = alarm
 		cur.fullLoad()
 		cur.playSong()
+		popupmsg("Destination temperature reached")
 		#play alarm for 10 seconds
 		time.sleep(10)
 		#stop alarm
