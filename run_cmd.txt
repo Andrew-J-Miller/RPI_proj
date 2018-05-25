@@ -1,0 +1,21 @@
+//The format of the args array is args[0] = destination temperature, args[1] = isF (a boolean for whether or not the temperature is in Fahrenheit.)
+
+private void run_cmd(string cmd, string args[1])
+{
+     ProcessStartInfo start = new ProcessStartInfo();
+     start.FileName = "my/full/path/to/python.exe";
+     start.Arguments = string.Format("{0} {1} {2}", cmd, args[0], args[1]);
+     start.UseShellExecute = false;
+     start.RedirectStandardOutput = true;
+     using(Process process = Process.Start(start))
+     {
+         using(StreamReader reader = process.StandardOutput)
+         {
+			//We need to find a way to dynamically update the temperature display as we read from the python script
+             string result = reader.ReadLine();
+             Console.Write(result);
+         }
+     }
+}
+
+
