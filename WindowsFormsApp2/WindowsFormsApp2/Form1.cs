@@ -331,9 +331,9 @@ namespace WindowsFormsApp2
 
         private void run_cooling()
         {
-            string cool = @"C:\CoolScript.py";
+            string cool = @"CoolScript.py";
             Process c = new Process();
-            c.StartInfo = new ProcessStartInfo(@"C:\Python34\python.exe", cool)
+            c.StartInfo = new ProcessStartInfo(@"/usr/bin/python3", cool)
             {
                 RedirectStandardOutput = true,
                 UseShellExecute = false,
@@ -382,9 +382,9 @@ namespace WindowsFormsApp2
 
         private void run_boiling()
         {
-            string boil = @"C:\BoilScript.py";
+            string boil = @"BoilScript.py";
             Process b = new Process();
-            b.StartInfo = new ProcessStartInfo(@"C:\Python34\python.exe", boil)
+            b.StartInfo = new ProcessStartInfo(@"/usr/bin/python3", boil)
             {
                 RedirectStandardOutput = true,
                 UseShellExecute = false,
@@ -407,9 +407,9 @@ namespace WindowsFormsApp2
 
         private void run_mashing()
         {
-            string mash = @"C:\MashScript.py";
+            string mash = @"MashScript.py";
             Process m = new Process();
-            m.StartInfo = new ProcessStartInfo(@"C:\Python34\python.exe", mash)
+            m.StartInfo = new ProcessStartInfo(@"/usr/bin/python3", mash)
             {
                 RedirectStandardOutput = true,
                 UseShellExecute = false,
@@ -432,9 +432,9 @@ namespace WindowsFormsApp2
 
         private void run_current_temperature()
         {
-            string curtemp = @"C:\HeaterTemplate.py";
+            string curtemp = @"HeaterTemplate.py";
             Process temp = new Process();
-            temp.StartInfo = new ProcessStartInfo(@"C:\Python34\python.exe", curtemp)
+            temp.StartInfo = new ProcessStartInfo(@"/usr/bin/python3", curtemp)
             {
             RedirectStandardOutput = true,
             UseShellExecute = false,
