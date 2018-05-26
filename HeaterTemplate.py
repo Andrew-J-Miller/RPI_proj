@@ -233,6 +233,8 @@ while True:
 		cur.fullUnload()
 		
 	
+	printf(curTemp)
+	
 	#change duty cycle every loop to the new value if applicable
 	p.ChangeDutyCycle(DC)
 	
