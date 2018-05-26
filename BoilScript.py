@@ -117,7 +117,7 @@ class songPlayer(pinCheck):
 
 
 
-alarm = songPlayer(#Alarm filename goes here in '')
+alarm = songPlayer('Alarm.mp3')
 
 
 
