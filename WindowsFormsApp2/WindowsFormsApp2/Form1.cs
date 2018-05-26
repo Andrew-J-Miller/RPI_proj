@@ -12,12 +12,8 @@ namespace WindowsFormsApp2
 
     public Form1()
         {
-
             InitializeComponent();
             // PythonEngine.Initialize();
-                    
-
-
         }
 
         //varibale
@@ -57,14 +53,14 @@ namespace WindowsFormsApp2
             SecondLabel3.Text = "";
         }
  
- 
-
+        //This funcation will show the user about box 
         private void About_Click(object sender, EventArgs e)
         {
             AboutBox1 a = new AboutBox1();
             a.ShowDialog();
         }
 
+        //This function will show the user help information
         private void HelpButton_Click(object sender, EventArgs e)
         {
             if (MessageBox.Show("Contact us:" +"  "+
@@ -79,6 +75,7 @@ namespace WindowsFormsApp2
 
         }
 
+        //The second timer
         int hours2, minutes2, seconds2;
         private void timer2_Tick(object sender, EventArgs e)
         {
@@ -124,6 +121,7 @@ namespace WindowsFormsApp2
             }
         }
 
+        //The third timer 
         int hours3, minutes3, seconds3;
         private void timer3_Tick(object sender, EventArgs e)
         {
@@ -169,6 +167,7 @@ namespace WindowsFormsApp2
             }
         }
 
+        //This fucation will allow the user to stop all timers
         private void button1_Click(object sender, EventArgs e)
         {
             timer1.Stop();
@@ -176,13 +175,13 @@ namespace WindowsFormsApp2
             timer3.Stop();
         }
 
+        //To print number "1" temperature box
         private void number1_Click(object sender, EventArgs e)
         {
             NumberOfDegree.Text +="1";
         }
 
-
-
+        //The user can go up or down with the hour number
         private void HourNumeric1_ValueChanged(object sender, EventArgs e)
         {
             HourNumeric1.Maximum = 24;
@@ -237,36 +236,43 @@ namespace WindowsFormsApp2
             SecondNumeric3.Minimum = 0;
         }
 
+        ////To print number "2" temperature box
         private void number2_Click(object sender, EventArgs e)
         {
             NumberOfDegree.Text += "2";
         }
 
+        //To print number "3" temperature box
         private void number3_Click(object sender, EventArgs e)
         {
             NumberOfDegree.Text += "3";
         }
-
+        
+        //To print number "4" temperature box
         private void number4_Click(object sender, EventArgs e)
         {
             NumberOfDegree.Text += "4";
         }
-
+        
+        //To print number "5" temperature box
         private void number5_Click(object sender, EventArgs e)
         {
             NumberOfDegree.Text += "5";
         }
 
+        //To print number "6" temperature box
         private void number6_Click(object sender, EventArgs e)
         {
             NumberOfDegree.Text += "6";
         }
 
+        //To print number "7" temperature box
         private void number7_Click(object sender, EventArgs e)
         {
             NumberOfDegree.Text += "7";
         }
 
+        //The user can start the second timer
         private void StartButton2_Click(object sender, EventArgs e)
         {
             if (HourNumeric2.Text == "" || Minuteumeric2.Text == "" || SecondNumeric2.Text == "")//here we check if the textboxes are empty
@@ -286,6 +292,7 @@ namespace WindowsFormsApp2
             }
         }
 
+        //The user can start the 3rd timer
         private void StartButton3_Click(object sender, EventArgs e)
         {
             if (HourNumeric3.Text == "" || MinuteNumeric3.Text == "" || SecondNumeric3.Text == "")//here we check if the textboxes are empty
@@ -305,6 +312,7 @@ namespace WindowsFormsApp2
             }
         }
 
+        //The user can start the 1st timer
         private void StartButton1_Click(object sender, EventArgs e)
         {
             if (HourNumeric1.Text == "" || MinuteNumeric1.Text == "" || SecondNumeric1.Text == "")//here we check if the textboxes are empty
@@ -324,6 +332,7 @@ namespace WindowsFormsApp2
             }
         }
 
+        //This will allow the user to start cooling prossess
         private void button4_Click(object sender, EventArgs e)
         {
             run_cooling();
@@ -355,6 +364,7 @@ namespace WindowsFormsApp2
 
         }
 
+        //Emergncey stop
         private void EStopButton_Click(object sender, EventArgs e)
         {
             //To stop all process
