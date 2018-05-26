@@ -214,7 +214,7 @@ while True:
 		cur.fullUnload()
 		break
 	
-	
+	printf(curTemp)
 	
 	
 	#Wait one second, current temp becomes new previous temp
