@@ -182,7 +182,7 @@ GPIO.setup(17, GPIO.OUT)
 isF = sys.argv[2]
 
 #The desired temperature entered by the user
-destTemp = sys.argv[1]
+destTemp = int(sys.argv[1])
 
 
 #--------------------------------------------------------------------------------------------------------------------------------
@@ -190,7 +190,7 @@ destTemp = sys.argv[1]
 
 NORM_FONT = ("Helvetica", 10)
 
-
+f = 'False'
 #p is the pin that uses pwm to control the relay. Currently set to GPIO 18 at 100 Hz
 p = GPIO.PWM(18, 100)
 
@@ -215,7 +215,7 @@ counter = 0
 
 #This will be the main loop for heating the water. Will break out after a designated amount of time has passed with the read temp being within some percent of the dest temp
 while True:
-	if isF == Falsed:
+	if isF == f:
 		curTemp = readTemp()
 	else:
 		curTemp = c_to_f(readTemp())
