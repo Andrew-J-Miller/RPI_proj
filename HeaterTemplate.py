@@ -187,7 +187,7 @@ counter = 0
 
 #This will be the main loop for heating the water. Will break out after a designated amount of time has passed with the read temp being within some percent of the dest temp
 while True:
-	if isF == FALSE:
+	if isF == False:
 		curTemp = readTemp()
 	else:
 		curTemp = c_to_f(readTemp())
