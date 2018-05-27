@@ -175,7 +175,7 @@ GPIO.setup(17, GPIO.OUT)
 isF = sys.argv[2]
 
 #The desired temperature entered by the user
-destTemp = sys.argv[1]
+destTemp = int(sys.argv[1])
 
 
 #--------------------------------------------------------------------------------------------------------------------------------
@@ -183,7 +183,7 @@ destTemp = sys.argv[1]
 
 NORM_FONT = ("Helvetica", 10)
 
-
+f = 'False'
 
 #A variable for the current temperature
 curTemp = 0
