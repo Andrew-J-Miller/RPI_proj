@@ -237,7 +237,7 @@ while True:
 		DC += 1
 	
 	#If the current temp is not within 1 degree of the target, reset the counter
-	if abs(curTemp - desTemp > 1):
+	if abs(curTemp - destTemp > 1):
 		counter = 0
 	else:
 		counter += 1
