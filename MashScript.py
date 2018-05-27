@@ -217,7 +217,7 @@ counter = 0
 while True:
 	if isF == FALSE:
 		curTemp = readTemp()
-	else
+	else:
 		curTemp = c_to_f(readTemp())
 	
 	
