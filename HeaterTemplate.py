@@ -200,17 +200,17 @@ while True:
 	
 	#less and increasing
 	#Decrement duty cycle if the current temp is over or within 2 degrees and still increasing	
-	else if curTemp < destTemp and DC > 0 and curTemp > prevTemp:
+	elif curTemp < destTemp and DC > 0 and curTemp > prevTemp:
 		DC -= 1
 	
 	#greater and increasing
 	#Overshot destTemp need to dial back duty cycle
-	else if curTemp > destTemp and DC > 0 and curTemp > prevTemp:
+	elif curTemp > destTemp and DC > 0 and curTemp > prevTemp:
 		DC -= 1
 	
 	#greater and decreasing
 	#As the temp approaches the destination, the DC needs to be dialled back to stabilize
-	else if curTemp > destTemp and DC < 100 and prevTemp > curTemp:
+	elif curTemp > destTemp and DC < 100 and prevTemp > curTemp:
 		DC += 1
 	
 	#If the current temp is not within 1 degree of the target, reset the counter
