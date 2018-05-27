@@ -196,7 +196,7 @@ GPIO.output(17, GPIO.HIGH)
 
 #This will be the main loop for cooling the water. Will play an alarm and break out of the loop when it reaches destination cooling temperature
 while True:
-	if isF == FALSE:
+	if isF == False:
 		curTemp = readTemp()
 	else:
 		curTemp = c_to_f(readTemp())
