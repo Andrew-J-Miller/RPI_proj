@@ -353,6 +353,7 @@ namespace WindowsFormsApp2
                 using (StreamReader reader = process.StandardOutput)
                 {
                     temp = reader.ReadLine();
+                    CurrentTemperature.Text = temp;
                     Console.Write(temp);
                 }
 
@@ -360,12 +361,12 @@ namespace WindowsFormsApp2
 
         }
 
-
+        /*
         private void NumberOfDegree_TextChanged(object sender, EventArgs e)
         {
-            NumberOfDegree.Text = temp;
+            CurrentTemperature.Text = temp;
         }
-
+        */
         //Emergncey stop
         private void EStopButton_Click(object sender, EventArgs e)
         {
@@ -404,6 +405,7 @@ namespace WindowsFormsApp2
                 using (StreamReader reader = process.StandardOutput)
                 {
                     temp = reader.ReadLine();
+                    CurrentTemperature.Text = temp;
                     Console.Write(temp);
                 }
 
@@ -429,6 +431,7 @@ namespace WindowsFormsApp2
                 using (StreamReader reader = process.StandardOutput)
                 {
                     temp = reader.ReadLine();
+                    CurrentTemperature.Text = temp;
                     Console.Write(temp);
                 }
 
@@ -452,7 +455,8 @@ namespace WindowsFormsApp2
             {
                 using (StreamReader reader = process.StandardOutput)
                 {
-                    string temp = reader.ReadLine();
+                    temp = reader.ReadLine();
+                    CurrentTemperature.Text = temp;
                     Console.Write(temp);
                 }
 
