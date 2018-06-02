@@ -157,8 +157,8 @@ def child(msg):
     B1.pack()
 
     def temp():
-        time = datetime.datetime.now().strftime("Time: %H:%M:%S")
-        lab.config(text=time)
+        #time = datetime.datetime.now().strftime("Time: %H:%M:%S")
+        #label.config(text=time)
         if isF == f:
             curTemp = readTemp()
         else:
@@ -261,7 +261,7 @@ while True:
 	else:
 		curTemp = c_to_f(readTemp())
 	
-	popupmsg2("The current temperature is%d" % curTemp)
+	#popupmsg2("The current temperature is%d" % curTemp)
 	#less & decreasing
 	#Increment duty cycle if current temperature is less than destination and the temperature is decreasing
 	if curTemp < destTemp and DC < 100 and curTemp < prevTemp:
