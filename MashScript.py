@@ -145,7 +145,7 @@ def popupmsg(msg):
 
 
 def child(msg):
-    popup = tk.Tk()
+	popup = tk.Tk()
 
     def leavemini():
         popup.destroy()
@@ -161,7 +161,7 @@ def child(msg):
         lab.config(text=time)
         if isF == f:
 		curTemp = readTemp()
-        else:
+	else:
 		curTemp = c_to_f(readTemp())
 
         label['text'] = str(curTemp)
