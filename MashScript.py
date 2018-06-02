@@ -1,9 +1,11 @@
 import RPi.GPIO as GPIO
 from pygame import mixer
+import os
 import time
 import sys
 import tkinter as tk
 from tkinter import ttk
+import datetime
 
 
 #This is the python script that will be called for the Mash step
@@ -120,13 +122,15 @@ class songPlayer(pinCheck):
 
 
 
-
 alarm = songPlayer('Alarm.mp3')
+
 
 
 
 #Definition for a simple tk popup that will appear when the target temp is reached		
 def popupmsg(msg):
+
+
     popup = tk.Tk()
 
     def leavemini():
@@ -139,8 +143,8 @@ def popupmsg(msg):
     B1.pack()
     popup.mainloop()
 
-	
-def popupmsg2(msg):
+
+def child(msg):
     popup = tk.Tk()
 
     def leavemini():
@@ -151,7 +155,27 @@ def popupmsg2(msg):
     label.pack(side="top", fill="x", pady=10)
     B1=ttk.Button(popup, text="Stop", command = leavemini)
     B1.pack()
+
+    def temp():
+        time = datetime.datetime.now().strftime("Time: %H:%M:%S")
+        lab.config(text=time)
+        if isF == f:
+		    curTemp = readTemp()
+        else:
+		    curTemp = c_to_f(readTemp())
+
+        label['text'] = str(curTemp)
+        popup.after(1000, clock) # run itself again after 1000 ms
+
+
+    temp();
+
     popup.mainloop()
+
+
+   
+
+    
 
 
 
@@ -223,6 +247,11 @@ p.start(DC)
 
 #A counter that will determine when the heating is complete
 counter = 0
+
+newpid = os.fork()
+if newpid == 0:
+    child("Current temperature is %d" % curTemp)
+    os._exit(0)
 
 
 #This will be the main loop for heating the water. Will break out after a designated amount of time has passed with the read temp being within some percent of the dest temp
