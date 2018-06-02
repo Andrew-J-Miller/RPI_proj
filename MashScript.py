@@ -139,7 +139,19 @@ def popupmsg(msg):
     B1.pack()
     popup.mainloop()
 
+	
+def popupmsg2(msg):
+    popup = tk.Tk()
 
+    def leavemini():
+        popup.destroy()
+
+    popup.wm_title("Running Mash")
+    label = ttk.Label(popup, text=msg, font=NORM_FONT)
+    label.pack(side="top", fill="x", pady=10)
+    B1=ttk.Button(popup, text="Stop", command = leavemini)
+    B1.pack()
+    popup.mainloop()
 
 
 
@@ -220,7 +232,7 @@ while True:
 	else:
 		curTemp = c_to_f(readTemp())
 	
-	
+	popupmsg2("The current temperature is" curTemp)
 	#less & decreasing
 	#Increment duty cycle if current temperature is less than destination and the temperature is decreasing
 	if curTemp < destTemp and DC < 100 and curTemp < prevTemp:
