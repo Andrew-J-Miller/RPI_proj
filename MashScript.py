@@ -147,30 +147,30 @@ def popupmsg(msg):
 def child(msg):
 	popup = tk.Tk()
 
-    def leavemini():
-        popup.destroy()
+	def leavemini():
+		popup.destroy()
 
-    popup.wm_title("Running Mash")
-    label = ttk.Label(popup, text=msg, font=NORM_FONT)
-    label.pack(side="top", fill="x", pady=10)
-    B1=ttk.Button(popup, text="Stop", command = leavemini)
-    B1.pack()
+	popup.wm_title("Running Mash")
+	label = ttk.Label(popup, text=msg, font=NORM_FONT)
+    	label.pack(side="top", fill="x", pady=10)
+    	B1=ttk.Button(popup, text="Stop", command = leavemini)
+    	B1.pack()
 
-    def temp():
-        time = datetime.datetime.now().strftime("Time: %H:%M:%S")
-        lab.config(text=time)
-        if isF == f:
-		curTemp = readTemp()
-	else:
-		curTemp = c_to_f(readTemp())
+    	def temp():
+        	time = datetime.datetime.now().strftime("Time: %H:%M:%S")
+        	lab.config(text=time)
+        	if isF == f:
+			curTemp = readTemp()
+		else:
+			curTemp = c_to_f(readTemp())
 
-        label['text'] = str(curTemp)
-        popup.after(1000, clock) # run itself again after 1000 ms
+    		label['text'] = str(curTemp)
+    		popup.after(1000, clock) # run itself again after 1000 ms
 
 
-    temp();
+    	temp();
 
-    popup.mainloop()
+    	popup.mainloop()
 
 
    
