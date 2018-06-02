@@ -245,7 +245,6 @@ while True:
 	#This counter number may need to be adjusted with some tests. We need to make sure the temperature is actually stabilized
 	#Will currently alert 
 	if (counter == 60):
-		cur.fullUnload()
 		cur = alarm
 		cur.fullLoad()
 		cur.playSong()
