@@ -203,7 +203,6 @@ while True:
 	
 	if curTemp <= destTemp:
 		# C# pop-up that notifies the user that the target temperature has been reached.
-		cur.fullUnload()
 		cur = alarm
 		cur.fullLoad()
 		cur.playSong()
