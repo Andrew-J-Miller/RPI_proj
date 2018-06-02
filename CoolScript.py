@@ -164,6 +164,8 @@ GPIO.setmode(GPIO.BCM)
 GPIO.setup(18, GPIO.OUT)
 #pin for activating pump relay currently set to 17 but may need to be changed later
 GPIO.setup(26, GPIO.OUT)
+#pin for activating solenoid valve
+GPIO.setup(12, GPIO.OUT)
 
 
 #---------USER DEFINED VARIABLES FROM THE UI ARE DECLARED HERE----------------------------------------------
@@ -188,6 +190,8 @@ f = 'False'
 #A variable for the current temperature
 curTemp = 0
 
+#write the solenoid valve to high
+GPIO.output(12, GPIO.HIGH)
 #write the pump relay pin to high to activate the pump
 GPIO.output(26, GPIO.HIGH)
 
@@ -224,8 +228,8 @@ while True:
 
 #Turn off pump relay
 GPIO.output(26, GPIO.LOW)
-
-
+#Turn off solenoid valve
+GPIO.output(12, GPIO.LOW)
 
 
 
