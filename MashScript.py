@@ -160,9 +160,9 @@ def child(msg):
         time = datetime.datetime.now().strftime("Time: %H:%M:%S")
         lab.config(text=time)
         if isF == f:
-		    curTemp = readTemp()
+		curTemp = readTemp()
         else:
-		    curTemp = c_to_f(readTemp())
+		curTemp = c_to_f(readTemp())
 
         label['text'] = str(curTemp)
         popup.after(1000, clock) # run itself again after 1000 ms
