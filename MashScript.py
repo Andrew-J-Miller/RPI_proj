@@ -165,7 +165,7 @@ def child(msg):
             curTemp = c_to_f(readTemp())
 
         label['text'] = str(curTemp)
-        popup.after(1000, clock) # run itself again after 1000 ms
+        popup.after(1000, temp) # run itself again after 1000 ms
 
 
     temp();
