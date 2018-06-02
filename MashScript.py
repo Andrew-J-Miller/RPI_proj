@@ -251,7 +251,6 @@ while True:
 	#Will currently alert 
 	if (counter == 60):
 		# C# pop-up that notifies the user that the target temperature has been reached.
-		cur.fullUnload()
 		cur = alarm
 		cur.fullLoad()
 		cur.playSong()
