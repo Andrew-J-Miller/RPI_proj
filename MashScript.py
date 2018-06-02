@@ -207,7 +207,8 @@ GPIO.setmode(GPIO.BCM)
 GPIO.setup(18, GPIO.OUT)
 #pin for activating pump relay currently set to 17 but may need to be changed later
 GPIO.setup(26, GPIO.OUT)
-
+#pin for activating solenoid valve
+GPIO.setup(25, GPIO.OUT)
 
 #---------USER DEFINED VARIABLES FROM THE UI ARE DECLARED HERE----------------------------------------------
 #after some searching, the way python reads variables from C# is with sys.argv[]
@@ -230,6 +231,8 @@ f = 'False'
 #p is the pin that uses pwm to control the relay. Currently set to GPIO 18 at 100 Hz
 p = GPIO.PWM(18, 100)
 
+#write solenoid valve to high
+GPIO.output(25, GPIO.HIGH)
 #write the pump relay pin to high to activate the pump
 GPIO.output(26, GPIO.HIGH)
 
