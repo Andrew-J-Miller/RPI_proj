@@ -163,7 +163,7 @@ sensor = MAX31855.MAX31855(spi=SPI.SpiDev(SPI_PORT, SPI_DEVICE))
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(18, GPIO.OUT)
 #pin for activating pump relay currently set to 17 but may need to be changed later
-GPIO.setup(17, GPIO.OUT)
+GPIO.setup(26, GPIO.OUT)
 
 
 #---------USER DEFINED VARIABLES FROM THE UI ARE DECLARED HERE----------------------------------------------
@@ -189,7 +189,7 @@ f = 'False'
 curTemp = 0
 
 #write the pump relay pin to high to activate the pump
-GPIO.output(17, GPIO.HIGH)
+GPIO.output(26, GPIO.HIGH)
 
 
 
@@ -223,7 +223,7 @@ while True:
 
 
 #Turn off pump relay
-GPIO.output(17, GPIO.LOW)
+GPIO.output(26, GPIO.LOW)
 
 
 
