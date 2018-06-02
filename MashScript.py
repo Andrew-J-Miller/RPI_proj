@@ -206,7 +206,7 @@ GPIO.setmode(GPIO.BCM)
 #pwm pin for main heating element
 GPIO.setup(18, GPIO.OUT)
 #pin for activating pump relay currently set to 17 but may need to be changed later
-GPIO.setup(17, GPIO.OUT)
+GPIO.setup(26, GPIO.OUT)
 
 
 #---------USER DEFINED VARIABLES FROM THE UI ARE DECLARED HERE----------------------------------------------
@@ -231,7 +231,7 @@ f = 'False'
 p = GPIO.PWM(18, 100)
 
 #write the pump relay pin to high to activate the pump
-GPIO.output(17, GPIO.HIGH)
+GPIO.output(26, GPIO.HIGH)
 
 #A variable for the current temperature
 curTemp = 0
