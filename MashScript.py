@@ -168,7 +168,7 @@ def child(msg):
         popup.after(1000, temp) # run itself again after 1000 ms
 
 
-    temp();
+    temp()
 
     popup.mainloop()
 
