@@ -140,21 +140,20 @@ def child(msg):
     def temp():
         #time = datetime.datetime.now().strftime("Time: %H:%M:%S")
         #label.config(text=time)
-	if isF != False:
-	    Temp = readTemp()
-	else:
-	    Temp = c_to_f(readTemp())		
-				
-        mes = "Cooling to %ddegrees" % Temp
-        label['text'] = mes
-        popup.after(1000,temp)
+		if isF != False:
+			Temp = readTemp()
+		else:
+			Temp = c_to_f(readTemp())		
+		mes = "Cooling to %ddegrees" % Temp
+		label['text'] = mes
+		popup.after(1000,temp)
 
 
 
 
-    temp()
+		temp()
 
-    popup.mainloop()
+		popup.mainloop()
 
 
 
