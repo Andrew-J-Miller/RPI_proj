@@ -158,7 +158,7 @@ def child(msg):
     def temp():
         #time = datetime.datetime.now().strftime("Time: %H:%M:%S")
         #label.config(text=time)
-        if isF == False:
+        if isF != False:
             Temp = readTemp()
         else:
             Temp = c_to_f(readTemp())		
@@ -231,7 +231,7 @@ NORM_FONT = ("Helvetica", 10)
 newpid = os.fork()
 if newpid == 0:
     child("Starting boil")
-    
+    GPIO.cleanup()
     os.system("pkill -f BoilScript.py")
     sys.exit()
 
@@ -257,7 +257,7 @@ counter = 0
 
 #This will be the main loop for heating the water. Will break out after a designated amount of time has passed with the read temp being within some percent of the dest temp
 while True:
-	if isF == False:
+	if isF != False:
 		curTemp = readTemp()
 	else:
 		curTemp = c_to_f(readTemp())
