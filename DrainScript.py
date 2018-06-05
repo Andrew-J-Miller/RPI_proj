@@ -58,5 +58,5 @@ while True:
 	#write solenoid valve to high
 	GPIO.output(25, GPIO.HIGH)
 	#write the pump relay pin to high to activate the pump
-	GPIO.output(26, GPIO.HIGH)
+	GPIO.output(19, GPIO.HIGH)
 		
