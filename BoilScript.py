@@ -141,27 +141,27 @@ def readTemp():
 
 #Definition for child process that will run to display current temperature
 def child(msg):
-    popup = tk.Tk()
+	popup = tk.Tk()
 
 
-    def leavemini():
-        popup.destroy()
+	def leavemini():
+        	popup.destroy()
 
 
-    popup.wm_title("Running Boil")
-    label = ttk.Label(popup, text=msg)
-    label.pack(side="top", fill="x", pady=10)
-    B1=ttk.Button(popup, text="Stop", command = leavemini)
-    B1.pack()
+    	popup.wm_title("Running Boil")
+    	label = ttk.Label(popup, text=msg)
+    	label.pack(side="top", fill="x", pady=10)
+    	B1=ttk.Button(popup, text="Stop", command = leavemini)
+    	B1.pack()
 
 
-    def temp():
+	def temp():
         #time = datetime.datetime.now().strftime("Time: %H:%M:%S")
         #label.config(text=time)
         if isF != False:
-            Temp = readTemp()
+        	Temp = readTemp()
         else:
-            Temp = c_to_f(readTemp())		
+        	Temp = c_to_f(readTemp())		
 				
         mes = "Boiling to %ddegrees" % Temp
         label['text'] = mes
