@@ -156,9 +156,9 @@ def c_to_f(c):
 
 #Function for reading the thermocouple temperature
 def readTemp():
-		temp = sensor.readTempC()
-		internal = sensor.readInternalC()
-		return temp
+	temp = sensor.readTempC()
+	internal = sensor.readInternalC()
+	return temp
 
 
 
@@ -181,21 +181,21 @@ def child(msg):
     def temp():
         #time = datetime.datetime.now().strftime("Time: %H:%M:%S")
         #label.config(text=time)
-		if isF != False:
-			Temp = readTemp()
-		else:
-			Temp = c_to_f(readTemp())		
+	if isF != False:
+		Temp = readTemp()
+	else:
+		Temp = c_to_f(readTemp())		
 				
-		mes = "Mashing to %ddegrees" % Temp
-		label['text'] = mes
-		popup.after(1000,temp)
+	mes = "Mashing to %ddegrees" % Temp
+	label['text'] = mes
+	popup.after(1000,temp)
 
 
 
 
-		temp()
+	temp()
 
-		popup.mainloop()
+	popup.mainloop()
 
 
 
@@ -210,6 +210,15 @@ NORM_FONT = ("Helvetica", 10)
 
 f = 'False'
 
+#Setting up GPIO pins
+GPIO.setmode(GPIO.BCM)
+#pwm pin for main heating element
+GPIO.setup(18, GPIO.OUT)
+#pin for activating pump relay currently set to 17 but may need to be changed later
+GPIO.setup(26, GPIO.OUT)
+#pin for activating solenoid valve
+GPIO.setup(25, GPIO.OUT)
+
 newpid = os.fork()
 if newpid == 0:
 	child("Starting mash")
@@ -219,14 +228,7 @@ if newpid == 0:
 
 
 
-#Setting up GPIO pins
-GPIO.setmode(GPIO.BCM)
-#pwm pin for main heating element
-GPIO.setup(18, GPIO.OUT)
-#pin for activating pump relay currently set to 17 but may need to be changed later
-GPIO.setup(26, GPIO.OUT)
-#pin for activating solenoid valve
-GPIO.setup(25, GPIO.OUT)
+
 
 #---------USER DEFINED VARIABLES FROM THE UI ARE DECLARED HERE----------------------------------------------
 #after some searching, the way python reads variables from C# is with sys.argv[]
