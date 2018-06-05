@@ -140,20 +140,20 @@ def child(msg):
     def temp():
         #time = datetime.datetime.now().strftime("Time: %H:%M:%S")
         #label.config(text=time)
-		if isF != False:
-			Temp = readTemp()
-		else:
-			Temp = c_to_f(readTemp())		
-		mes = "Cooling to %ddegrees" % Temp
-		label['text'] = mes
-		popup.after(1000,temp)
+	if isF != False:
+		Temp = readTemp()
+	else:
+		Temp = c_to_f(readTemp())		
+	mes = "Cooling to %ddegrees" % Temp
+	label['text'] = mes
+	popup.after(1000,temp)
 
 
 
 
-		temp()
+	temp()
 
-		popup.mainloop()
+	popup.mainloop()
 
 
 
@@ -187,9 +187,9 @@ def c_to_f(c):
 
 #Function for reading the thermocouple temperature
 def readTemp():
-		temp = sensor.readTempC()
-		internal = sensor.readInternalC()
-		return temp
+	temp = sensor.readTempC()
+	internal = sensor.readInternalC()
+	return temp
 
 
 		
@@ -203,6 +203,14 @@ NORM_FONT = ("Helvetica", 10)
 
 f = 'False'
 
+#Setting up GPIO pins
+GPIO.setmode(GPIO.BCM)
+GPIO.setup(18, GPIO.OUT)
+#pin for activating pump relay currently set to 17 but may need to be changed later
+GPIO.setup(19, GPIO.OUT)
+#pin for activating solenoid valve
+GPIO.setup(12, GPIO.OUT)
+
 
 newpid = os.fork()
 if newpid == 0:
@@ -213,13 +221,6 @@ if newpid == 0:
 
 
 
-#Setting up GPIO pins
-GPIO.setmode(GPIO.BCM)
-GPIO.setup(18, GPIO.OUT)
-#pin for activating pump relay currently set to 17 but may need to be changed later
-GPIO.setup(26, GPIO.OUT)
-#pin for activating solenoid valve
-GPIO.setup(12, GPIO.OUT)
 
 
 #---------USER DEFINED VARIABLES FROM THE UI ARE DECLARED HERE----------------------------------------------
