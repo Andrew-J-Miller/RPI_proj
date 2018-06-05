@@ -182,9 +182,9 @@ def child(msg):
         #time = datetime.datetime.now().strftime("Time: %H:%M:%S")
         #label.config(text=time)
 	if isF != False:
-		Temp = readTemp()
+	    Temp = readTemp()
 	else:
-		Temp = c_to_f(readTemp())		
+	    Temp = c_to_f(readTemp())		
 				
         mes = "Mashing to %ddegrees" % Temp
         label['text'] = mes
