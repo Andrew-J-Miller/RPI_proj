@@ -181,7 +181,7 @@ def child(msg):
     def temp():
         #time = datetime.datetime.now().strftime("Time: %H:%M:%S")
         #label.config(text=time)
-	if isF == f:
+	if isF != False:
 		Temp = readTemp()
 	else:
 		Temp = c_to_f(readTemp())		
@@ -212,9 +212,10 @@ f = 'False'
 
 newpid = os.fork()
 if newpid == 0:
-    child("Starting mash")
-    os.system("pkill -f MashScript.py")
-    sys.exit()
+	child("Starting mash")
+	GPIO.cleanup()
+	os.system("pkill -f MashScript.py")
+	sys.exit()
 
 
 
@@ -263,15 +264,10 @@ p.start(DC)
 #A counter that will determine when the heating is complete
 counter = 0
 
-newpid = os.fork()
-if newpid == 0:
-    child("Current temperature is %d" % curTemp)
-    os._exit(0)
-
 
 #This will be the main loop for heating the water. Will break out after a designated amount of time has passed with the read temp being within some percent of the dest temp
 while True:
-	if isF == f:
+	if isF != False:
 		curTemp = readTemp()
 	else:
 		curTemp = c_to_f(readTemp())
