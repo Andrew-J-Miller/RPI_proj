@@ -2,8 +2,10 @@ import RPi.GPIO as GPIO
 from pygame import mixer
 import time
 import sys
+import os
 import tkinter as tk
 from tkinter import ttk
+import datetime
 
 
 #libraries for thermocouple ADC and GPIO SPI
@@ -119,6 +121,47 @@ alarm = songPlayer('Alarm.mp3')
 
 
 
+#Definition for child process that will run to display current temperature
+def child(msg):
+    popup = tk.Tk()
+
+
+    def leavemini():
+        popup.destroy()
+
+
+    popup.wm_title("Running Cooling")
+    label = ttk.Label(popup, text=msg)
+    label.pack(side="top", fill="x", pady=10)
+    B1=ttk.Button(popup, text="Stop", command = leavemini)
+    B1.pack()
+
+
+    def temp():
+        #time = datetime.datetime.now().strftime("Time: %H:%M:%S")
+        #label.config(text=time)
+	if isF == f:
+		Temp = readTemp()
+	else:
+		Temp = c_to_f(readTemp())		
+				
+        mes = "Cooling to %ddegrees" % Temp
+        label['text'] = mes
+        popup.after(1000,temp)
+
+
+
+
+    temp()
+
+    popup.mainloop()
+
+
+
+
+
+
+
 #Definition for a simple tk popup that will appear when the target temp is reached		
 def popupmsg(msg):
     popup = tk.Tk()
@@ -157,6 +200,17 @@ SPI_PORT   = 0
 SPI_DEVICE = 0
 sensor = MAX31855.MAX31855(spi=SPI.SpiDev(SPI_PORT, SPI_DEVICE))
 
+NORM_FONT = ("Helvetica", 10)
+
+f = 'False'
+
+
+newpid = os.fork()
+if newpid == 0:
+    child("Starting cooling")
+    os.system("pkill -f CoolScript.py")
+    sys.exit()
+
 
 
 #Setting up GPIO pins
@@ -183,9 +237,7 @@ destTemp = int(sys.argv[1])
 #--------------------------------------------------------------------------------------------------------------------------------
 
 
-NORM_FONT = ("Helvetica", 10)
 
-f = 'False'
 
 #A variable for the current temperature
 curTemp = 0

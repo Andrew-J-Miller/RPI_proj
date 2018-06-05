@@ -2,8 +2,10 @@ import RPi.GPIO as GPIO
 from pygame import mixer
 import time
 import sys
+import os
 import tkinter as tk
 from tkinter import ttk
+import datetime
 
 #libraries for thermocouple ADC and GPIO SPI
 import Adafruit_GPIO.SPI as SPI
@@ -11,7 +13,6 @@ import Adafruit_MAX31855.MAX31855 as MAX31855
 
 #BoilScript.py
 #This is the script that will be run during the boil step. Essentially identical to heating template script
-
 mixer.init()
 
 
@@ -138,6 +139,43 @@ def readTemp():
 		return temp
 
 
+#Definition for child process that will run to display current temperature
+def child(msg):
+    popup = tk.Tk()
+
+
+    def leavemini():
+        popup.destroy()
+
+
+    popup.wm_title("Running Boil")
+    label = ttk.Label(popup, text=msg)
+    label.pack(side="top", fill="x", pady=10)
+    B1=ttk.Button(popup, text="Stop", command = leavemini)
+    B1.pack()
+
+
+    def temp():
+        #time = datetime.datetime.now().strftime("Time: %H:%M:%S")
+        #label.config(text=time)
+        if isF == False:
+            Temp = readTemp()
+        else:
+            Temp = c_to_f(readTemp())		
+				
+        mes = "Boiling to %ddegrees" % Temp
+        label['text'] = mes
+        popup.after(1000,temp)
+
+
+
+
+    temp()
+
+    popup.mainloop()
+
+
+
 		
 		
 #Definition for a simple tk popup that will appear when the target temp is reached		
@@ -189,6 +227,15 @@ f = 'False'
 
 NORM_FONT = ("Helvetica", 10)
 
+
+newpid = os.fork()
+if newpid == 0:
+    child("Starting boil")
+    
+    os.system("pkill -f BoilScript.py")
+    sys.exit()
+
+
 #p is the pin that uses pwm to control the relay. Currently set to GPIO 18 at 100 Hz
 p = GPIO.PWM(18, 100)
 
@@ -210,7 +257,7 @@ counter = 0
 
 #This will be the main loop for heating the water. Will break out after a designated amount of time has passed with the read temp being within some percent of the dest temp
 while True:
-	if isF == f:
+	if isF == False:
 		curTemp = readTemp()
 	else:
 		curTemp = c_to_f(readTemp())
@@ -253,6 +300,8 @@ while True:
 		time.sleep(10)
 		#stop alarm
 		cur.fullUnload()
+	
+	
 	
 	
 	print(curTemp)

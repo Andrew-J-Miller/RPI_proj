@@ -144,37 +144,6 @@ def popupmsg(msg):
     popup.mainloop()
 
 
-def child(msg):
-    popup = tk.Tk()
-
-    def leavemini():
-        popup.destroy()
-
-    popup.wm_title("Running Mash")
-    label = ttk.Label(popup, text=msg, font=NORM_FONT)
-    label.pack(side="top", fill="x", pady=10)
-    B1=ttk.Button(popup, text="Stop", command = leavemini)
-    B1.pack()
-
-    def temp():
-        #time = datetime.datetime.now().strftime("Time: %H:%M:%S")
-        #label.config(text=time)
-        if isF == f:
-            curTemp = readTemp()
-        else:
-            curTemp = c_to_f(readTemp())
-
-        label['text'] = str(curTemp)
-        popup.after(1000, temp) # run itself again after 1000 ms
-
-
-    temp()
-
-    popup.mainloop()
-
-
-   
-
     
 
 
@@ -192,12 +161,60 @@ def readTemp():
 		return temp
 
 
+
+#Definition for child process that will run to display current temperature
+def child(msg):
+    popup = tk.Tk()
+
+
+    def leavemini():
+        popup.destroy()
+
+
+    popup.wm_title("Running Mash")
+    label = ttk.Label(popup, text=msg)
+    label.pack(side="top", fill="x", pady=10)
+    B1=ttk.Button(popup, text="Stop", command = leavemini)
+    B1.pack()
+
+
+    def temp():
+        #time = datetime.datetime.now().strftime("Time: %H:%M:%S")
+        #label.config(text=time)
+	if isF == f:
+		Temp = readTemp()
+	else:
+		Temp = c_to_f(readTemp())		
+				
+        mes = "Mashing to %ddegrees" % Temp
+        label['text'] = mes
+        popup.after(1000,temp)
+
+
+
+
+    temp()
+
+    popup.mainloop()
+
+
+
 		
 	
 # Raspberry Pi hardware SPI configuration.
 SPI_PORT   = 0
 SPI_DEVICE = 0
 sensor = MAX31855.MAX31855(spi=SPI.SpiDev(SPI_PORT, SPI_DEVICE))
+
+NORM_FONT = ("Helvetica", 10)
+
+f = 'False'
+
+newpid = os.fork()
+if newpid == 0:
+    child("Starting mash")
+    os.system("pkill -f MashScript.py")
+    sys.exit()
 
 
 
@@ -225,16 +242,11 @@ destTemp = int(sys.argv[1])
 #--------------------------------------------------------------------------------------------------------------------------------
 
 
-NORM_FONT = ("Helvetica", 10)
 
-f = 'False'
 #p is the pin that uses pwm to control the relay. Currently set to GPIO 18 at 100 Hz
 p = GPIO.PWM(18, 100)
 
-#write solenoid valve to high
-GPIO.output(25, GPIO.HIGH)
-#write the pump relay pin to high to activate the pump
-GPIO.output(26, GPIO.HIGH)
+
 
 #A variable for the current temperature
 curTemp = 0
@@ -298,8 +310,12 @@ while True:
 		cur = alarm
 		cur.fullLoad()
 		cur.playSong()
-		popupmsg("Destination temperature reached")
+		popupmsg("Destination temperature reached. Starting pump.")
 		#play alarm for 10 seconds
+		#write solenoid valve to high
+		GPIO.output(25, GPIO.HIGH)
+		#write the pump relay pin to high to activate the pump
+		GPIO.output(26, GPIO.HIGH)
 		time.sleep(10)
 		#stop alarm
 		cur.fullUnload()
