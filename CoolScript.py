@@ -140,7 +140,7 @@ def child(msg):
     def temp():
         #time = datetime.datetime.now().strftime("Time: %H:%M:%S")
         #label.config(text=time)
-	if isF == f:
+	if isF != False:
 		Temp = readTemp()
 	else:
 		Temp = c_to_f(readTemp())		
@@ -207,9 +207,10 @@ f = 'False'
 
 newpid = os.fork()
 if newpid == 0:
-    child("Starting cooling")
-    os.system("pkill -f CoolScript.py")
-    sys.exit()
+	child("Starting cooling")
+	GPIO.cleanup()
+	os.system("pkill -f CoolScript.py")
+	sys.exit()
 
 
 
@@ -252,7 +253,7 @@ GPIO.output(26, GPIO.HIGH)
 
 #This will be the main loop for cooling the water. Will play an alarm and break out of the loop when it reaches destination cooling temperature
 while True:
-	if isF == False:
+	if isF != False:
 		curTemp = readTemp()
 	else:
 		curTemp = c_to_f(readTemp())
