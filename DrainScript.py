@@ -47,7 +47,7 @@ newpid = os.fork()
 if newpid == 0:
     child("Draining wort")
     GPIO.cleanup()
-    os.system("pkill -f MashScript.py")
+    os.system("pkill -f DrainScript.py")
     sys.exit()
 
 
