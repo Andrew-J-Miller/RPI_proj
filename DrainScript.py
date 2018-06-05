@@ -36,20 +36,23 @@ SPI_PORT   = 0
 SPI_DEVICE = 0
 sensor = MAX31855.MAX31855(spi=SPI.SpiDev(SPI_PORT, SPI_DEVICE))
 
-newpid = os.fork()
-if newpid == 0:
-    child("Draining wort")
-	GPIO.cleanup()
-    os.system("pkill -f MashScript.py")
-    sys.exit()
-
-#Setting up GPIO pins
-GPIO.setmode(GPIO.BCM)	
+GPIO.setmode(GPIO.BCM)
 
 #pin for activating pump relay currently set to 17 but may need to be changed later
 GPIO.setup(26, GPIO.OUT)
 #pin for activating solenoid valve
 GPIO.setup(25, GPIO.OUT)
+
+newpid = os.fork()
+if newpid == 0:
+    child("Draining wort")
+    GPIO.cleanup()
+    os.system("pkill -f MashScript.py")
+    sys.exit()
+
+
+
+
 
 while True:
 	#write solenoid valve to high
