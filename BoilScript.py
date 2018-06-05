@@ -265,7 +265,7 @@ while True:
 	
 	#less & decreasing
 	#Increment duty cycle if current temperature is less than destination and the temperature is decreasing
-	if curTemp < destTemp and DC < 100 and curTemp < prevTemp:
+	if curTemp < destTemp and DC < 100 and curTemp <= prevTemp:
 		DC += 1
 	
 	#less and increasing
