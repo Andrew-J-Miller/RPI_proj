@@ -215,7 +215,7 @@ GPIO.setmode(GPIO.BCM)
 #pwm pin for main heating element
 GPIO.setup(18, GPIO.OUT)
 #pin for activating pump relay currently set to 17 but may need to be changed later
-GPIO.setup(26, GPIO.OUT)
+GPIO.setup(19, GPIO.OUT)
 #pin for activating solenoid valve
 GPIO.setup(25, GPIO.OUT)
 
@@ -313,7 +313,7 @@ while True:
 		#write solenoid valve to high
 		GPIO.output(25, GPIO.HIGH)
 		#write the pump relay pin to high to activate the pump
-		GPIO.output(26, GPIO.HIGH)
+		GPIO.output(19, GPIO.HIGH)
 		time.sleep(10)
 		#stop alarm
 		cur.fullUnload()
