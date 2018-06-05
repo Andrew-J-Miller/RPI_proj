@@ -246,7 +246,7 @@ curTemp = 0
 #write the solenoid valve to high
 GPIO.output(12, GPIO.HIGH)
 #write the pump relay pin to high to activate the pump
-GPIO.output(26, GPIO.HIGH)
+GPIO.output(19, GPIO.HIGH)
 
 
 
@@ -280,7 +280,7 @@ while True:
 
 
 #Turn off pump relay
-GPIO.output(26, GPIO.LOW)
+GPIO.output(19, GPIO.LOW)
 #Turn off solenoid valve
 GPIO.output(12, GPIO.LOW)
 
