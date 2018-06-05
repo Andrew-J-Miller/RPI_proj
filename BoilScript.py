@@ -134,9 +134,9 @@ def c_to_f(c):
 
 #Function for reading the thermocouple temperature
 def readTemp():
-		temp = sensor.readTempC()
-		internal = sensor.readInternalC()
-		return temp
+	temp = sensor.readTempC()
+	internal = sensor.readInternalC()
+	return temp
 
 
 #Definition for child process that will run to display current temperature
@@ -170,9 +170,9 @@ def child(msg):
 
 
 
-		temp()
+	temp()
 
-		popup.mainloop()
+	popup.mainloop()
 
 
 
