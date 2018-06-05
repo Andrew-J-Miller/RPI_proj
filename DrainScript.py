@@ -39,7 +39,7 @@ sensor = MAX31855.MAX31855(spi=SPI.SpiDev(SPI_PORT, SPI_DEVICE))
 GPIO.setmode(GPIO.BCM)
 
 #pin for activating pump relay currently set to 17 but may need to be changed later
-GPIO.setup(26, GPIO.OUT)
+GPIO.setup(19, GPIO.OUT)
 #pin for activating solenoid valve
 GPIO.setup(25, GPIO.OUT)
 
