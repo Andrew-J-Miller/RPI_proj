@@ -115,9 +115,6 @@ class songPlayer(pinCheck):
 
 
 
-
-
-
 alarm = songPlayer('Alarm.mp3')
 
 
